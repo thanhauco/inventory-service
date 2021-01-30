@@ -1,0 +1,2 @@
+using InventoryService.Models;
+namespace InventoryService.Services { public class DiscountService { public decimal Apply(Item i, string code) { if(code=="SALE") return i.Price * 0.9m; return i.Price; } } }
