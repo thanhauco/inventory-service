@@ -1,0 +1,2 @@
+using System.Collections.Generic;
+namespace InventoryService.Services { public class CacheService { private static Dictionary<string, object> _cache = new Dictionary<string, object>(); public object Get(string key) => _cache.ContainsKey(key) ? _cache[key] : null; public void Set(string key, object val) => _cache[key] = val; } }
