@@ -1,7 +1,11 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using InventoryService.Data;
-using InventoryService.Services;
-using InventoryService.Middleware;
-namespace InventoryService { public class Startup { public void ConfigureServices(IServiceCollection services) { services.AddDbContext<InventoryContext>(o => o.UseNpgsql("Host=localhost;Database=inv;Username=postgres;Password=password")); services.AddScoped<IItemService, ItemService>(); services.AddControllers(); services.AddSwaggerGen(); services.AddHealthChecks(); } public void Configure(IApplicationBuilder app) { app.UseSwagger(); app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API")); app.UseMiddleware<Auth>(); app.UseRouting(); app.UseEndpoints(e => { e.MapControllers(); e.MapHealthChecks("/health"); }); } } }
+using MassTransit;
+// ... imports
+public class Startup {
+    public void ConfigureServices(IServiceCollection services) {
+        services.AddMassTransit(x => {
+            x.UsingRabbitMq((context, cfg) => cfg.Host("localhost"));
+        });
+        services.AddMassTransitHostedService();
+        // ... rest
+    }
+}
