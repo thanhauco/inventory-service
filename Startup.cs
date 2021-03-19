@@ -1,11 +1,14 @@
-using MassTransit;
+using HotChocolate;
 // ... imports
 public class Startup {
     public void ConfigureServices(IServiceCollection services) {
-        services.AddMassTransit(x => {
-            x.UsingRabbitMq((context, cfg) => cfg.Host("localhost"));
-        });
-        services.AddMassTransitHostedService();
+        services.AddGraphQLServer().AddQueryType<Query>();
         // ... rest
+    }
+    public void Configure(IApplicationBuilder app) {
+        app.UseEndpoints(e => {
+            e.MapGraphQL();
+            e.MapControllers();
+        });
     }
 }
