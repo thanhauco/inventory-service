@@ -1,4 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using InventoryService.Services;
-using InventoryService.Models;
-namespace InventoryService.Controllers { [ApiController] [Route("[controller]")] public class ItemsController : ControllerBase { private readonly IItemService _svc; public ItemsController(IItemService svc) { _svc = svc; } [HttpGet] public IActionResult Get() => Ok(_svc.GetAll()); [HttpGet("{id}")] public IActionResult Get(int id) { var i = _svc.Get(id); if(i==null) return NotFound(); return Ok(i); } [HttpPost] public IActionResult Create(Item i) { _svc.Add(i); return CreatedAtAction(nameof(Get), new { id = i.Id }, i); } } }
+// ... imports
+namespace InventoryService.Controllers {
+    [ApiController]
+    [Route("[controller]")]
+    public class ItemsController : ControllerBase {
+        // ... existing
+        [HttpGet]
+        [ResponseCache(Duration = 60)]
+        public IActionResult Get() => Ok(_ctx.Items.ToList());
+        // ... rest
+    }
+}
