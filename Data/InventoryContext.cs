@@ -1,3 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using InventoryService.Models;
-namespace InventoryService.Data { public class InventoryContext : DbContext { public InventoryContext(DbContextOptions<InventoryContext> options) : base(options) { } public DbSet<Item> Items { get; set; } } }
+// ... imports
+namespace InventoryService.Data {
+    public class InventoryContext : DbContext {
+        // ... existing
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Item>().HasIndex(i => i.Name);
+        }
+    }
+}
