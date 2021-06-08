@@ -1,9 +1,10 @@
 using Serilog;
 public class Program {
     public static void Main(string[] args) {
-        Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
-        CreateHostBuilder(args).Build().Run();
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+        // ... rest
     }
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args).UseSerilog().ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 }
