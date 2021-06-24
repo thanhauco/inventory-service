@@ -1,9 +1,8 @@
-using Prometheus;
+using InventoryService.Middleware;
 // ... imports
 public class Startup {
     public void Configure(IApplicationBuilder app) {
-        app.UseMetricServer();
-        app.UseHttpMetrics();
+        app.UseMiddleware<CorrelationId>();
         // ... rest
     }
 }
