@@ -1,13 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
+using InventoryService.Services;
 // ... imports
-namespace InventoryService.Controllers {
-    [ApiController]
-    [Route("[controller]")]
-    public class ItemsController : ControllerBase {
-        // ... existing
-        [HttpGet]
-        [ResponseCache(Duration = 60)]
-        public IActionResult Get() => Ok(_ctx.Items.ToList());
+public class ItemsController : ControllerBase {
+    [HttpPost]
+    public IActionResult Create(Item i) {
+        i.Name = Sanitizer.Clean(i.Name);
         // ... rest
     }
 }
