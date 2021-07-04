@@ -1,9 +1,6 @@
-using InventoryService.Services;
+using System.Threading.Tasks;
 // ... imports
 public class ItemsController : ControllerBase {
-    [HttpPost]
-    public IActionResult Create(Item i) {
-        i.Name = Sanitizer.Clean(i.Name);
-        // ... rest
-    }
+    [HttpGet]
+    public async Task<IActionResult> Get() => Ok(await _svc.GetAllAsync());
 }
