@@ -1,19 +1,13 @@
 # Inventory Service
 
 ## Features
-- CRUD
-- Search
-- Discounts
-- Swagger
-- Docker
-- Auth
-- PostgreSQL
-- Redis Caching
-- Resilience
-- Pagination
-- RabbitMQ Events
-- GraphQL
-- Serilog
+- Enterprise V3 Features
+- Response Caching
+- Security Headers
+- Health UI
+- Prometheus Metrics
+- Correlation ID
+- Async API
 
 ## Status
-Enterprise Ready V3.
+Enterprise Scale V4.
