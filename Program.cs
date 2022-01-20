@@ -1,13 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-var app = builder.Build();
-if (app.Environment.IsDevelopment()) {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-app.UseAuthorization();
-app.MapControllers();
-app.MapGet("/minimal", () => "Hello Minimal API");
-app.Run();
+using OpenTelemetry.Trace;
+// ... existing
+builder.Services.AddOpenTelemetryTracing(b => {
+    b.AddAspNetCoreInstrumentation()
+     .AddHttpClientInstrumentation()
+     .AddConsoleExporter();
+});
+// ... rest
