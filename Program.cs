@@ -1,8 +1,6 @@
-using OpenTelemetry.Trace;
+using Polly;
 // ... existing
-builder.Services.AddOpenTelemetryTracing(b => {
-    b.AddAspNetCoreInstrumentation()
-     .AddHttpClientInstrumentation()
-     .AddConsoleExporter();
-});
+builder.Services.AddHttpClient("External", client => {
+    client.BaseAddress = new Uri("https://api.example.com");
+}).AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
 // ... rest
