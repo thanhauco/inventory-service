@@ -1,0 +1,5 @@
+graph TD;
+    Client-->API;
+    API-->DB[(Postgres)];
+    API-->Cache[(Redis)];
+    API-->Queue(RabbitMQ);
