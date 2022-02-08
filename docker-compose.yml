@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  app:
+    image: inventory-service
+    build: .
+    ports:
+      - "8080:80"
