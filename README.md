@@ -1,13 +1,13 @@
 # Inventory Service
 
 ## Features
-- Enterprise V3 Features
-- Response Caching
-- Security Headers
-- Health UI
-- Prometheus Metrics
-- Correlation ID
-- Async API
+- Enterprise V4 Features
+- .NET 6 Upgrade
+- Minimal APIs
+- GitHub Actions CI
+- OpenTelemetry
+- Feature Flags
+- Integration Tests
 
 ## Status
-Enterprise Scale V4.
+Modernized V5 (2022).
